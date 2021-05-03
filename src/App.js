@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+
+import React, { useState, createContext } from 'react';
+
 import './App.css';
+import CompA from './components/CompA';
+
+// 1. step : to create Context
+export const CounterContext = createContext();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+    const [count, setCount] = useState(0)
+    
+    const increment = () => {
+        setCount( prevCount => prevCount + 1)
+    }
+
+    const decrement = () => {
+        setCount( prevCount => prevCount - 1)
+    }
+
+    const reset = () => {
+        setCount(0)
+    }
+
+    return (
+        <CounterContext.Provider value={{count,  increment, decrement, reset}}>
+            <div className="App">
+                <CompA />
+            </div>
+        </CounterContext.Provider>
+    );
+}
 export default App;
+
+
+
+
